@@ -15,7 +15,7 @@
 loader:
     mov $kernel_stack, %esp
 
-    callConstructors
+    call callConstructors
 
     push %eax
     push %ebx
