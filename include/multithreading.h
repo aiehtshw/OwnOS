@@ -1,7 +1,7 @@
 #ifndef __MYOS__MULTITHREADING_H
 #define __MYOS__MULTITHREADING_H
 
-#include <multitasking.h>
+
 #include <common/types.h>
 #include <gdt.h>
 

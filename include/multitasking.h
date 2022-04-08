@@ -4,12 +4,10 @@
 
 #include <common/types.h>
 #include <gdt.h>
+#include <multithreading.h>
 
 namespace myos
 {
-    
-    
-    
     
     class Task
     {
@@ -18,6 +16,7 @@ namespace myos
         common::uint8_t stack[4096]; // 4 KiB
         CPUState* cpustate;
     public:
+        ThreadManager threadManager;
         Task(GlobalDescriptorTable *gdt, void entrypoint());
         ~Task();
     };
