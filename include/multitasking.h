@@ -29,6 +29,7 @@ namespace myos
         int numTasks;
         int currentTask;
     public:
+        ThreadManager threadManager;
         TaskManager();
         ~TaskManager();
         bool AddTask(Task* task);

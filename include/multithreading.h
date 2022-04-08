@@ -13,8 +13,9 @@ namespace myos{
 
         private:
             common::uint8_t stack[4096]; // 4 KiB
-            CPUState* cpustate;
+            
         public:
+            CPUState* cpustate;
             Thread(GlobalDescriptorTable *gdt, void entrypoint());
             ~Thread();
     };
@@ -22,11 +23,12 @@ namespace myos{
 
     class ThreadManager{
    
-        private:
+     
+            
+        public:
             Thread *threads[256];
             int numThread;
             int currentThread;
-        public:
             ThreadManager();
             ~ThreadManager();
             // for adding thread

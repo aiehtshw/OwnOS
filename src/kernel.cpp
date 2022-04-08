@@ -123,17 +123,22 @@ public:
 
 
 
-void taskA()
-{
+void taskA(){
     while(true)
-        printf("A");
+        printf("!");
 }
-void taskB()
-{
+void taskB(){
     while(true)
-        printf("B");
+        printf("_");
 }
-
+void threadA(){
+    while(true)
+        printf("C");
+}
+void threadB(){
+    while(true)
+        printf("D");
+}
 
 
 
@@ -158,9 +163,11 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     
     TaskManager taskManager;
     Task task1(&gdt, taskA);
+    Thread thread(&gdt, threadA);
+    task1.threadManager.AddThread(&thread);
     Task task2(&gdt, taskB);
     taskManager.AddTask(&task1);
-    taskManager.AddTask(&task2);
+    //taskManager.AddTask(&task2);
     
     InterruptManager interrupts(0x20, &gdt, &taskManager);
     

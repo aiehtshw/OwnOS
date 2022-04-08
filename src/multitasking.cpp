@@ -1,4 +1,3 @@
-
 #include <multitasking.h>
 
 using namespace myos;
@@ -7,6 +6,7 @@ using namespace myos::common;
 
 Task::Task(GlobalDescriptorTable *gdt, void entrypoint())
 {
+    
     cpustate = (CPUState*)(stack + 4096 - sizeof(CPUState));
     
     cpustate -> eax = 0;
@@ -52,6 +52,7 @@ TaskManager::~TaskManager()
 
 bool TaskManager::AddTask(Task* task)
 {
+    task->threadManager = this->threadManager;
     if(numTasks >= 256)
         return false;
     tasks[numTasks++] = task;
@@ -62,7 +63,8 @@ CPUState* TaskManager::Schedule(CPUState* cpustate)
 {
     if(numTasks <= 0)
         return cpustate;
-    
+    if(threadManager.threads[threadManager.currentThread]>=0)
+         tasks[currentTask]->cpustate =threadManager.threads[threadManager.currentThread]->cpustate = cpustate;
     if(currentTask >= 0)
         tasks[currentTask]->cpustate = cpustate;
     
